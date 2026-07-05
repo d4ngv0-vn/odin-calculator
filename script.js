@@ -124,8 +124,25 @@ let currNum = '0';
 const calBtnContainer = document.getElementById('cal-btn-container');
 const screen = document.getElementById('number');
 const history = document.getElementById('history');
+const calculator = document.getElementById('calculator');
 
-
+const keyboardMap = (k) => {
+    if (isDigit(k) || isOperator(k) || k == '=') {
+        return k;
+    } else if (k == 'Backspace') {
+        return 'BS';
+    } else if (k == ' ') {
+        return 'C';
+    } else if (k == 'Enter') {
+        return 'CE';
+    } else if (k == '.') {
+        return '.';
+    }
+    return '';
+}
 btnInit();
 resetCal();
 UIInit();
+document.onkeydown = (e) => {
+    btnHandler(keyboardMap(e.key));
+}
